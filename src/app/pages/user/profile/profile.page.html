@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mi perfil</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label position="fixed">Nombres:</ion-label>
+      <ion-input type="text" required formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Apellidos:</ion-label>
+      <ion-input type="text" required formControlName="lastName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Usuario:</ion-label>
+      <ion-input type="text" required formControlName="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">Correo:</ion-label>
+      <ion-input type="email" required formControlName="email"></ion-input>
+    </ion-item>
+    <ion-button type="submit" class="ion-margin-top" expand="block"
+    [disabled]="!form.valid">
+      Actualizar
+    </ion-button>
+  </form>
+  <ion-button expand="full" (click)="logout()">Cerrar sesión</ion-button>
+</ion-content>

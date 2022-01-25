@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "mov_App",
-	"webDir": "www",
-	"bundledWebRuntime": false
+  "appId": "com.company.movapp",
+  "appName": "movApp",
+  "webDir": "www",
+  "bundledWebRuntime": false
 }

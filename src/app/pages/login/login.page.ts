@@ -21,8 +21,8 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.credentials = this.fb.group({
-      email: ['eve.holt@reqres.in',[Validators.required,Validators.email]],
-      password: ['cityslicka',[Validators.required,Validators.minLength(6)]]
+      identifier: ['ldelgado@unitru.edu.pe',[Validators.required,Validators.email]],
+      password: ['password',[Validators.required,Validators.minLength(6)]]
     });
   }
   async login(){
@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
        await loading.dismiss();
        const alert = await this.alertController.create({
          header: 'Error al iniciar sesión',
-         message: res.error.error,
+         message: 'Usuario o contraseña incorrecta',//res.error.error,
          buttons: ['OK'],
        });
        await alert.present();
@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
   }
   // eslint-disable-next-line @typescript-eslint/member-ordering
   get email() {
-    return this.credentials.get('email');
+    return this.credentials.get('identifier');
   }
   // eslint-disable-next-line @typescript-eslint/member-ordering
   get password() {

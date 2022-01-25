@@ -15,8 +15,4 @@ export class Tab4Page implements OnInit {
 
   ngOnInit() {
   }
-  async logout() {
-    await this.authService.logout();
-    this.router.navigateByUrl('/', { replaceUrl: true });
-  }
 }

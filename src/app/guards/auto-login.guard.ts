@@ -14,7 +14,7 @@ export class AutoLoginGuard implements CanLoad {
       filter(val => val !== null), // Filter out initial Behaviour subject value
       take(1), // Otherwise the Observable doesn't complete!
       map(isAuthenticated => {
-        console.log('Found previous token, automatic login');
+        console.log('isAuthenticated: ',isAuthenticated);
         if (isAuthenticated) {
           // Directly open inside area
           this.router.navigateByUrl('/tabs', { replaceUrl: true });
