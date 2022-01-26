@@ -4,7 +4,16 @@
 
 export const environment = {
   apiKey: 'a0e9ecd5a53d86edbf821493e9c7105f',
-  production: false
+  production: false,
+  firebaseConfig :{
+    apiKey: 'AIzaSyCK_UvsyBaq_DPFeUKn9skMiabjOdFDmHY',
+    authDomain: 'movapp-cd2e8.firebaseapp.com',
+    projectId: 'movapp-cd2e8',
+    storageBucket: 'movapp-cd2e8.appspot.com',
+    messagingSenderId: '964246844365',
+    appId: '1:964246844365:web:447339f006bb4ad18c8a84',
+    measurementId: 'G-G2Z9J04LKE'
+  }
 };
 
 /*

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { TheMovieDBService } from '../services/api/themoviedb.service';
+import { AuthAngularFireService } from '../services/auth-angular-fire.service';
 import { ModalService } from '../services/modal.service';
 
 @Component({
@@ -19,12 +20,16 @@ export class Tab1Page implements OnInit {
   loadingCurrentEventData: any;
   constructor(
     private service: TheMovieDBService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private auth2: AuthAngularFireService
   ) {}
   ngOnInit(): void {
     this.initSliderList();
     this.initGenerosList();
     this.initPopularList();
+    //this.auth2.login({email: 'admin@gmail.com', password: 'password'});
+    //this.auth2.registro({email: 'admin2@gmail.com', password: 'password2'});
+
   }
   initSliderList(): void {
     this.service.getTrendingList(this.modelType).
