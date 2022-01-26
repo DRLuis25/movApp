@@ -7,6 +7,9 @@
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-progress-bar *ngIf="isLoading" type="indeterminate"> </ion-progress-bar>
   <div
     style="background: linear-gradient(45deg, black, transparent)"
@@ -49,6 +52,23 @@
               >{{ valoracion }}
               <ion-icon name="star-outline" style="font-size: 16px"></ion-icon>
             </ion-chip>
+            <ion-button
+              size="small"
+              fill="clear"
+              *ngIf="!movieInFavoritos"
+              (click)="toggleFavouritesItem(id, true)"
+            >
+              Agregar a favoritos
+            </ion-button>
+
+            <ion-button
+              size="small"
+              fill="clear"
+              *ngIf="movieInFavoritos"
+              (click)="toggleFavouritesItem(id, false)"
+            >
+              Eliminar de favoritos
+            </ion-button>
           </div>
         </ion-toolbar>
       </div>
@@ -64,7 +84,7 @@
       <ion-list-header>
         <h3>Elenco</h3>
       </ion-list-header>
-      <ion-item *ngFor="let castItem of elencoItemList.slice(0, 10) ">
+      <ion-item *ngFor="let castItem of elencoItemList.slice(0, 10)">
         <ion-avatar slot="start">
           <img
             *ngIf="castItem.profile_path; else personDefaulIcon"
@@ -111,6 +131,34 @@
       </ion-item>
     </ion-list>
   </div>
+
+  <div class="">
+    <p class="ion-margin">Comentarios</p>
+    <ion-button size="small" (click)="this.displayReviewModal()">
+      Enviar un comentario
+    </ion-button>
+
+    <div *ngIf="!currentMovieReviews || currentMovieReviews.length === 0">
+      <p>No hay comentarios recientes</p>
+    </div>
+
+    <div *ngIf="currentMovieReviews && currentMovieReviews.length > 0">
+      <ion-item *ngFor="let review of currentMovieReviews">
+        <ion-avatar slot="start">
+          <img
+            src="https://www.svgrepo.com/show/326744/person-circle-outline.svg"
+          />
+        </ion-avatar>
+        <ion-label>
+          <span>{{ review.username }}</span>
+          <div>{{ review.fecha | date: "dd/MM/yyyy HH:mm:ss" }}</div>
+          <div>Valoración: {{ review.valoracion }}</div>
+          <div>{{ review.comentario }}</div>
+        </ion-label>
+      </ion-item>
+    </div>
+  </div>
+
   <ion-grid fixed="true" *ngIf="appRecommendationsContainer.length > 0">
     <ion-list>
       <ion-item>

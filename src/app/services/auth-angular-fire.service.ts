@@ -8,7 +8,6 @@ import { User } from '../models/user.model';
 export class AuthAngularFireService {
   authState = null;
   constructor(
-    private firestore: AngularFirestore,
     private authService: AngularFireAuth,
   ) {
     console.log('Conectando a firebase');

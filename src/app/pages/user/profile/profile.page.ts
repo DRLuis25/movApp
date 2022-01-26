@@ -11,11 +11,11 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class ProfilePage implements OnInit {
   activeUser: any;
   form = new FormGroup({
-    name: new FormControl('',[Validators.required, Validators.minLength(3)]),
-    lastName: new FormControl('',[Validators.required, Validators.minLength(3)]),
-    username: new FormControl('',[Validators.required, Validators.minLength(6)]),
-    password: new FormControl('',[Validators.required, Validators.minLength(6)]),
-    email: new FormControl('',[Validators.required, Validators.email]),
+    name: new FormControl('Luis',[Validators.required, Validators.minLength(3)]),
+    lastName: new FormControl('Delgado Rodriguez',[Validators.required, Validators.minLength(3)]),
+    username: new FormControl('Luis',[Validators.required, Validators.minLength(6)]),
+    password: new FormControl('password',[Validators.required, Validators.minLength(6)]),
+    email: new FormControl('ldelgado@unitru.edu.pe',[Validators.required, Validators.email]),
   });
   constructor(
     private authService: AuthenticationService,

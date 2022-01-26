@@ -1,8 +1,12 @@
+import { FirestoreDBService } from './../../services/firestore-db.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ModalController } from '@ionic/angular';
 import { forkJoin } from 'rxjs';
+import { Comentario } from 'src/app/models/comentario.model';
 import { TheMovieDBService } from 'src/app/services/api/themoviedb.service';
 import { ModalService } from 'src/app/services/modal.service';
+import { ModalReviewComponent } from '../modal-review/modal-review.component';
 
 @Component({
   selector: 'app-modal-page',
@@ -27,10 +31,15 @@ export class ModalPageComponent implements OnInit {
   isVideoEnabled: boolean;
   dangerousVideoUrl: string;
   videoUrl: any;
+  currentMovieReviews: any;
+
+  movieInFavoritos: boolean;
   constructor(
     private service: TheMovieDBService,
     private modalService: ModalService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    public modalCtrl: ModalController,
+    public firestoreDB: FirestoreDBService
   ) { }
 
   ngOnInit() {
@@ -66,6 +75,7 @@ export class ModalPageComponent implements OnInit {
       this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.dangerousVideoUrl);
     }
     this.initRecomendaciones();
+    this.initComentarios();
     this.isLoading = false;
   }
   closeModal(){
@@ -91,6 +101,13 @@ export class ModalPageComponent implements OnInit {
       this.isLoading = false;
     });
   }
+  initComentarios(){
+    this.firestoreDB.getComentariosById(this.id).then((comentarios)=>{
+      console.log('id: ',this.id);
+      console.log('comentarios: ',comentarios);
+      this.currentMovieReviews = comentarios;
+    });
+  }
   cardEventListener(modelItem){
     this.isVideoEnabled = false;
     forkJoin(this.service.getDetalleById(this.modelType,modelItem.id),
@@ -102,5 +119,28 @@ export class ModalPageComponent implements OnInit {
       modelItem.videos = res[2];
       this.modalService.presentModal(modelItem, this.modelType);
     });
+  }
+  async displayReviewModal(){
+    const modal = await this.modalCtrl.create({
+      component: ModalReviewComponent,
+      cssClass: '',
+      componentProps: {
+        movieId: this.id,
+        movieName: this.titulo
+      }
+    });
+    return await modal.present();
+  }
+  doRefresh(ionRefresh){
+    this.firestoreDB.getComentariosById(this.id).then((comentarios)=>{
+      this.currentMovieReviews = comentarios;
+      setTimeout(() => {
+        console.log('Comentarios actualizado');
+        ionRefresh.target.complete();
+      }, 2000);
+    });
+  }
+  toggleFavouritesItem(id: string, estado: boolean){
+
   }
 }

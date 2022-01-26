@@ -28,6 +28,14 @@ const routes: Routes = [
     redirectTo: '/tabs/tab1',
     pathMatch: 'full',
   },
+  {
+    path: 'watchlist',
+    loadChildren: () => import('./pages/user/watchlist/watchlist.module').then( m => m.WatchlistPageModule)
+  },
+  {
+    path: 'favourites',
+    loadChildren: () => import('./pages/user/favourites/favourites.module').then( m => m.FavouritesPageModule)
+  },
 ];
 @NgModule({
   imports: [

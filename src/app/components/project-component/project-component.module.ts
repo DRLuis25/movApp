@@ -6,12 +6,14 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Tab1Page } from 'src/app/tab1/tab1.page';
 import { ModalPageComponent } from '../modal-page/modal-page.component';
+import { ModalReviewComponent } from '../modal-review/modal-review.component';
 
 @NgModule({
   declarations: [
     CardComponent,
     SliderComponent,
-    ModalPageComponent
+    ModalPageComponent,
+    ModalReviewComponent
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,7 @@ import { ModalPageComponent } from '../modal-page/modal-page.component';
   ],
   exports: [CardComponent,
     SliderComponent,
-    ModalPageComponent]
+    ModalPageComponent,
+    ModalReviewComponent]
 })
 export class ProjectComponentModule {}

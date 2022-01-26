@@ -8,23 +8,13 @@
     <ion-content>
       <ion-list>
         <ion-item [routerLink]="['/profile']" (click)="toggleMenu()">Mi perfil</ion-item>
-        <ion-item [routerLink]="['/']" (click)="toggleMenu()">
+        <ion-item [routerLink]="['/watchlist']" (click)="toggleMenu()">
           <ion-icon name="arrow-down-circle-outline"></ion-icon> &nbsp;
-          <ion-label>Opción 1</ion-label>
+          <ion-label>Mi lista</ion-label>
         </ion-item>
-        <ion-item [routerLink]="['/']" (click)="toggleMenu()">
+        <ion-item [routerLink]="['/favourites']" (click)="toggleMenu()">
           <ion-icon name="arrow-down-circle-outline"></ion-icon> &nbsp;
-          <ion-label>Opción 2</ion-label>
-        </ion-item>
-        <ion-item [routerLink]="['/']" (click)="toggleMenu()">
-          <ion-icon name="arrow-down-circle-outline"></ion-icon> &nbsp;
-          <ion-label>Opción 3</ion-label>
-        </ion-item>
-        <ion-item>Opción 4</ion-item>
-        <ion-item>Opción 5</ion-item>
-        <ion-item [routerLink]="['/']" (click)="toggleMenu()">
-          <ion-icon name="arrow-down-circle-outline"></ion-icon> &nbsp;
-          <ion-label>Opción 6</ion-label>
+          <ion-label>Favoritos</ion-label>
         </ion-item>
         <ion-item [routerLink]="['/']" (click)="toggleMenu()">
           <ion-icon name="arrow-back-circle-outline"></ion-icon> &nbsp;

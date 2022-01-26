@@ -1,0 +1,37 @@
+
+<ion-content>
+  <div class="reviewModalTitle">
+    <h2>Enviar un comentario -  {{movieName}}</h2>
+  </div>
+
+  <div class="ion-margin input-group">
+    <ion-item>
+      <ion-label floating>Nombre</ion-label>
+      <ion-input type="text" [(ngModel)]="review.username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Valoración</ion-label>
+      <ion-select [(ngModel)]="review.valoracion">
+        <ion-select-option value="A+">A+</ion-select-option>
+        <ion-select-option value="A">A</ion-select-option>
+        <ion-select-option value="A-">A-</ion-select-option>
+        <ion-select-option value="B+">B+</ion-select-option>
+        <ion-select-option value="B">B</ion-select-option>
+        <ion-select-option value="B-">B-</ion-select-option>
+        <ion-select-option value="C+">C+</ion-select-option>
+        <ion-select-option value="C">C</ion-select-option>
+        <ion-select-option value="C-">C-</ion-select-option>
+        <ion-select-option value="F">F</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Comentario</ion-label>
+      <ion-textarea [(ngModel)]="review.comentario"></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="block" (click)="closeReviewModal()">Cancelar</ion-button>
+    <ion-button expand="block" (click)="submitReview(review)">Enviar comentario</ion-button>
+  </div>
+</ion-content>
