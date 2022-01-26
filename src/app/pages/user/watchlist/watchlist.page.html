@@ -1,64 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Mi lista</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/">
+      </ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
 
-  <div *ngIf="detalleFavoritos?.length > 0">
-    <ion-list *ngFor="let obs of detalleFavoritos.reverse(); let i = index">
-      <ion-item
-        *ngIf="i < this.itemLimit && obs | async as movie"
-        (click)="openMovieDetail(movie.id)"
-      >
-        <div class="watchitem">
-          <div
-            (click)="removeItemFromFavourites(detalleFavoritos.length, i, movie.id, movie.title); $event.stopPropagation(); "
-            class="watchitem__deletebtn"
-          >
-            <ion-icon name="close"></ion-icon>
-          </div>
-
-          <div class="watchitem__poster">
-            <img
-              *ngIf="movie.poster_path"
-              [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path"
-            />
-            <img
-              *ngIf="!movie.poster_path"
-              src="../assets/imgs/poster_unavailable.jpg"
-            />
-          </div>
-          <div class="watchitem__details">
-            <div class="watchitem__title">{{movie.title}}</div>
-            <div class="watchitem__genre">
-              <span *ngFor="let genre of movie.genres; let i = index">
-                <span *ngIf="i < 2"> {{genre.name}} | </span>
-              </span>
-            </div>
-            <div class="watchitem__length">
-              {{movie.runtime}} min.
-            </div>
-            <p class="watchitem__plot">{{movie.overview | slice:0:68}} ...</p>
-          </div>
-        </div>
-      </ion-item>
-    </ion-list>
-
-    <ion-infinite-scroll
-      class="actorInfiniteScroll"
-      (ionInfinite)="doInfinite($event, detalleFavoritos?.length)"
-    >
-      <ion-infinite-scroll-content loadingText="Loading more movies...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-  </div>
-
-  <div *ngIf="detalleFavoritos?.length === 0">
-    <h1 class="no-watchlist">No hay items en favoritos</h1>
-  </div>
 </ion-content>

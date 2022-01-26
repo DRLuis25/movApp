@@ -76,6 +76,7 @@ export class ModalPageComponent implements OnInit {
     }
     this.initRecomendaciones();
     this.initComentarios();
+    this.checkIsFav();
     this.isLoading = false;
   }
   closeModal(){
@@ -141,6 +142,12 @@ export class ModalPageComponent implements OnInit {
     });
   }
   toggleFavouritesItem(id: string, estado: boolean){
-
+    this.firestoreDB.toggleFavoritosItem(id,estado);
+    this.movieInFavoritos = estado;
+  }
+  checkIsFav(){
+    this.firestoreDB.getList('favoritos').then(movies => {
+      this.movieInFavoritos = movies.indexOf(this.id) !== -1;
+  });
   }
 }

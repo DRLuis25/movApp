@@ -8,15 +8,19 @@
     <ion-content>
       <ion-list>
         <ion-item [routerLink]="['/profile']" (click)="toggleMenu()">Mi perfil</ion-item>
-        <ion-item [routerLink]="['/watchlist']" (click)="toggleMenu()">
+        <!-- <ion-item [routerLink]="['/watchlist']" (click)="toggleMenu()">
           <ion-icon name="arrow-down-circle-outline"></ion-icon> &nbsp;
           <ion-label>Mi lista</ion-label>
+        </ion-item> -->
+        <ion-item [routerLink]="['/tabs/tab3']" (click)="toggleMenu()">
+          <ion-icon name="search-outline"></ion-icon> &nbsp;
+          <ion-label>Búsqueda</ion-label>
         </ion-item>
         <ion-item [routerLink]="['/favourites']" (click)="toggleMenu()">
-          <ion-icon name="arrow-down-circle-outline"></ion-icon> &nbsp;
-          <ion-label>Favoritos</ion-label>
+          <ion-icon name="star-outline"></ion-icon> &nbsp;
+          <ion-label>Mis Favoritos</ion-label>
         </ion-item>
-        <ion-item [routerLink]="['/']" (click)="toggleMenu()">
+        <ion-item [routerLink]="['/profile']" (click)="toggleMenu()">
           <ion-icon name="arrow-back-circle-outline"></ion-icon> &nbsp;
           <ion-label>Cerrar sesión</ion-label>
         </ion-item>

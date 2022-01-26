@@ -1,9 +1,42 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Mis favoritos</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/">
+      </ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
+  <div *ngIf="detalleFavoritos?.length > 0">
+    <ion-row>
+      <ion-col *ngFor="let item of detalleFavoritos" size-lg="2" size-md="4" size-sm="6">
+        <app-card
+        [title]="item.title"
+        [image]="item.image"
+        [rating]="item.rating"
+        [model]="item.modelItem"
+        (cardEventTrigger)="cardEventListener($event)"
+        >
+        </app-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-infinite-scroll
+      class="actorInfiniteScroll"
+      (ionInfinite)="doInfinite($event, detalleFavoritos?.length)"
+    >
+      <ion-infinite-scroll-content loadingText="Loading more movies...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+
+  <div *ngIf="detalleFavoritos?.length === 0">
+    <h1 class="no-watchlist">No hay items en favoritos</h1>
+  </div>
 </ion-content>

@@ -65,11 +65,11 @@ export class FirestoreDBService {
     });
   }
 
-  toggleFavoritosItem(id: number, add: boolean) {
+  toggleFavoritosItem(id: string, add: boolean) {
       const userId = '1';//this.auth.getUserID();
 
       this.getList('favoritos').then(favoritos => {
-          let filteredFavouriteslist: number[];
+          let filteredFavouriteslist: string[];
           if (!add && favoritos.indexOf(id) !== -1) {
               filteredFavouriteslist = favoritos;
               filteredFavouriteslist.splice(favoritos.indexOf(id), 1);
@@ -79,9 +79,10 @@ export class FirestoreDBService {
                   new Set(dirtyfavoritoslist)
               );
           } else {
-              console.log('Error Toggling Favourites Item');
+              console.log('Error ');
               return;
           }
+
           this.firestore.doc(`users/${userId}`).set(
               {
                   userId,
