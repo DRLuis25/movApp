@@ -30,5 +30,8 @@ export class AuthAngularFireService {
             this.authState = usr;
             return usr;
         });
-}
+  }
+  getUserID(){
+    return '61eeee42f209f33520b36ca4';
+  }
 }

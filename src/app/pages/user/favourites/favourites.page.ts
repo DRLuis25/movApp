@@ -23,22 +23,22 @@ export class FavouritesPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getFavourites();
+    this.getFavoritos();
   }
 
-  refreshFavourites() {
-    this.getFavourites();
+  refreshFavoritos() {
+    this.getFavoritos();
   }
 
-  getFavourites() {
+  getFavoritos() {
     return this.firestoreDB.getList('favoritos').then(movies => {
         this.favoritos = movies;
         console.log(movies);
-        this.getDetailedFavourites();
+        this.getDetailedFavoritos();
     });
   }
 
-  getDetailedFavourites() {
+  getDetailedFavoritos() {
       this.detalleFavoritos = [];
       this.favoritos.forEach(id=>{
         this.service.getDetalleById('movie',id).subscribe(el=>{
@@ -66,7 +66,7 @@ export class FavouritesPage implements OnInit {
       this.modalService.presentModal(modelItem, 'movie');
     });
   }
-  removeItemFromFavourites(listLength: number, index: number,movieId: string,movieName: string ) {
+  removeItemFromFavoritos(listLength: number, index: number,movieId: string,movieName: string ) {
       const indexToDel = listLength - index - 1;
       this.detalleFavoritos.splice(indexToDel, 1);
       // Eliminar de la watchlist
@@ -74,7 +74,7 @@ export class FavouritesPage implements OnInit {
   }
 
   doRefresh(ionRefresh){
-    this.refreshFavourites();
+    this.refreshFavoritos();
     setTimeout(() => {
       console.log('Comentarios actualizado');
       ionRefresh.target.complete();

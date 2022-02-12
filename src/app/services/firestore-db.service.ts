@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Comentario } from '../models/comentario.model';
+import { AuthAngularFireService } from './auth-angular-fire.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ export class FirestoreDBService {
 
   constructor(
     private firestore: AngularFirestore,
+    private auth: AuthAngularFireService
   ) { }
 
   agregarComentarioById(id: string, comentario: Comentario){
@@ -66,16 +68,16 @@ export class FirestoreDBService {
   }
 
   toggleFavoritosItem(id: string, add: boolean) {
-      const userId = '1';//this.auth.getUserID();
+      const userId = this.auth.getUserID();
 
       this.getList('favoritos').then(favoritos => {
-          let filteredFavouriteslist: string[];
+          let filteredFavoritoslist: string[];
           if (!add && favoritos.indexOf(id) !== -1) {
-              filteredFavouriteslist = favoritos;
-              filteredFavouriteslist.splice(favoritos.indexOf(id), 1);
+              filteredFavoritoslist = favoritos;
+              filteredFavoritoslist.splice(favoritos.indexOf(id), 1);
           } else if (add) {
               const dirtyfavoritoslist = [...favoritos, id];
-              filteredFavouriteslist = Array.from(
+              filteredFavoritoslist = Array.from(
                   new Set(dirtyfavoritoslist)
               );
           } else {
@@ -86,7 +88,7 @@ export class FirestoreDBService {
           this.firestore.doc(`users/${userId}`).set(
               {
                   userId,
-                  favoritos: filteredFavouriteslist
+                  favoritos: filteredFavoritoslist
               },
               { merge: true } // Merge document if it already exists
           );
@@ -97,7 +99,7 @@ export class FirestoreDBService {
       return new Promise<any[]>((resolve, reject) => {
           this.firestore
               .collection('users')
-              .doc('1')//this.auth.getUserID())
+              .doc(this.auth.getUserID())
               .ref.get()
               .then((doc: any)=> {
                   if (doc.exists) {

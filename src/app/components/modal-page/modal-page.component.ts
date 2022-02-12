@@ -71,7 +71,7 @@ export class ModalPageComponent implements OnInit {
       this.equipoItemList.push(el);
     });
     if (this.modelItemList.videos.results.length > 0) {
-      this.dangerousVideoUrl = 'https://www.youtube.com/embed/' + this.modelItemList.videos.results[0].key;
+      this.dangerousVideoUrl = 'https://www.youtube.com/embed/' + videos.results[0].key;
       this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.dangerousVideoUrl);
     }
     this.initRecomendaciones();
@@ -145,6 +145,7 @@ export class ModalPageComponent implements OnInit {
     this.firestoreDB.toggleFavoritosItem(id,estado);
     this.movieInFavoritos = estado;
   }
+
   checkIsFav(){
     this.firestoreDB.getList('favoritos').then(movies => {
       this.movieInFavoritos = movies.indexOf(this.id) !== -1;
